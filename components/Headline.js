@@ -5,14 +5,13 @@ export function Headline(props) {
     <div>        
 
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">{props.title}</a>
+          <a href="https://nextjs.org">{props.page} page</a>
         </h1>
 
         <p className={styles.description}>
           Get started by editing{' '}
-          <code className={styles.code}>pages/{props.page}.js</code>
+          {props.children}
         </p>
-
     </div>
   )
 }
