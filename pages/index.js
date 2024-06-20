@@ -13,7 +13,7 @@ export default function Home() {
     console.log(e.target.href)
     e.preventDefault();//阻止链接到下一个页面
     alert(bar);
-  });
+  },[]);
   return (
     <div className={styles.container}>
       <Head>
