@@ -4,6 +4,7 @@ import { Footer } from '../components/Footer'
 import { Main } from '../components/Main'
 import { Header } from '../components/Header'
 import { useCallback } from 'react'
+import Link from 'next/link'
 
 
 export default function Home() {
@@ -20,7 +21,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <a href="/about" onClick={handleclick}>链接到about页面</a>
+      <Link href="/about" onClick={handleclick}>
+      链接到about页面
+      </Link>
        <Main page="index"/>
 
      <Footer />
