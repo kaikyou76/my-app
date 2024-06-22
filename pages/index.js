@@ -9,6 +9,7 @@ export default function Home() {
   const[bar, setBar] = useState(1);
   const[text, setText] = useState("a");
   const[isShow, setIsShow] = useState(true);
+  const[array, setArray] = useState([1,2,3]);
  
   const handleClick = useCallback((e) =>{
     console.log(bar); 
@@ -32,6 +33,18 @@ export default function Home() {
       }else{return true;}
     });
   },[]);
+
+  const handleAdd = useCallback(()=>{
+    setArray((prevArray) =>{
+      console.log(prevArray);
+      if(prevArray.some((item) => item === text)){
+        alert("相同数组元素已经存在！");
+        return prevArray;
+      }
+      const newArray = [...prevArray, text];
+      return newArray;
+    });
+  },[text]);
   
   useEffect(() =>{
     document.body.style.backgroundColor = "lightblue";
@@ -54,7 +67,13 @@ export default function Home() {
       <button onClick={handleDisplay}>
         {isShow ? "不显示" : "显示"}
       </button>
-  
+      <button onClick={handleAdd}>追加</button>
+      <ul>
+        {console.log(array)}
+        {array.map(item => {
+          return(<li key={item}>{item}</li>);           
+        })}
+      </ul>
       <input type="text" value={text} onChange={handleChange} />
        <Main page="index"/>
      <Footer />
