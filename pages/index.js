@@ -7,11 +7,21 @@ import { useCallback, useEffect, useState } from 'react'
 
 export default function Home() {
   const[bar, setBar] = useState(1);
+  const[text, setText] = useState("a");
  
-  const handleclick = useCallback((e) =>{
+  const handleClick = useCallback((e) =>{
     console.log(bar); 
-      setBar( bar + 1);
-  },[]);
+      setBar((prevBar) => prevBar + 1);
+  },[bar]);
+  
+  const handleChange = useCallback((e) => {
+    console.log(text);
+    if (e.target.value.length > 5) {
+      alert("输入不能超过5个字符");
+      return;
+    }
+    setText(e.target.value.trim());
+  },[text]);
   
   useEffect(() =>{
     document.body.style.backgroundColor = "lightblue";
@@ -28,9 +38,10 @@ export default function Home() {
       </Head>
       <Header />
       <h1>{bar}</h1>
-      <button  onClick={handleclick}>
+      <button  onClick={handleClick}>
       累计按钮
       </button>
+      <input type="text" value={text} onChange={handleChange} />
        <Main page="index"/>
      <Footer />
     </div>
