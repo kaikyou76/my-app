@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from 'react'
 export default function Home() {
   const[bar, setBar] = useState(1);
   const[text, setText] = useState("a");
+  const[isShow, setIsShow] = useState(true);
  
   const handleClick = useCallback((e) =>{
     console.log(bar); 
@@ -21,7 +22,16 @@ export default function Home() {
       return;
     }
     setText(e.target.value.trim());
-  },[text]);
+  },[]);
+
+  const handleDisplay = useCallback(() => {
+    setIsShow((prevIsShow) => {
+      console.log(prevIsShow);//打印前一次状态
+      if (prevIsShow){
+        return false;
+      }else{return true;}
+    });
+  },[]);
   
   useEffect(() =>{
     document.body.style.backgroundColor = "lightblue";
@@ -37,10 +47,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <h1>{bar}</h1>
+      {isShow ? <h1>{bar}</h1> : null}
       <button  onClick={handleClick}>
       累计按钮
       </button>
+      <button onClick={handleDisplay}>
+        {isShow ? "不显示" : "显示"}
+      </button>
+  
       <input type="text" value={text} onChange={handleChange} />
        <Main page="index"/>
      <Footer />
