@@ -3,56 +3,15 @@ import styles from '../styles/Home.module.css'
 import { Footer } from '../components/Footer'
 import { Main } from '../components/Main'
 import { Header } from '../components/Header'
-import { useCallback, useEffect, useState } from 'react'
+import { useCounter } from '../customhooks/useCounter'
+import { useInputArray } from '../customhooks/useInputArray'
+import { useBgColor } from '../customhooks/useBgColor'
 
 export default function Home() {
-  const[bar, setBar] = useState(1);
-  const[text, setText] = useState("a");
-  const[isShow, setIsShow] = useState(true);
-  const[array, setArray] = useState([1,2,3]);
- 
-  const handleClick = useCallback((e) =>{
-    console.log(bar); 
-      setBar((prevBar) => prevBar + 1);
-  },[bar]);
+  const{bar, isShow, handleClick, handleDisplay} = useCounter();
+  const{text, array, handleChange, handleAdd} = useInputArray();
+  useBgColor();
   
-  const handleChange = useCallback((e) => {
-    console.log(text);
-    if (e.target.value.length > 5) {
-      alert("输入不能超过5个字符");
-      return;
-    }
-    setText(e.target.value.trim());
-  },[]);
-
-  const handleDisplay = useCallback(() => {
-    setIsShow((prevIsShow) => {
-      console.log(prevIsShow);//打印前一次状态
-      if (prevIsShow){
-        return false;
-      }else{return true;}
-    });
-  },[]);
-
-  const handleAdd = useCallback(()=>{
-    setArray((prevArray) =>{
-      console.log(prevArray);
-      if(prevArray.some((item) => item === text)){
-        alert("相同数组元素已经存在！");
-        return prevArray;
-      }
-      const newArray = [...prevArray, text];
-      return newArray;
-    });
-  },[text]);
-  
-  useEffect(() =>{
-    document.body.style.backgroundColor = "lightblue";
-    return (() =>{
-      document.body.style.backgroundColor = "lightgreen";
-    })
-  },[]);
-
   return (
     <div className={styles.container}>
       <Head>
