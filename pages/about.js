@@ -3,15 +3,13 @@ import styles from '../styles/Home.module.css'
 import { Footer } from '../components/Footer'
 import { Main } from '../components/Main'
 import { Header } from '../components/Header'
-import { useCounter } from '../customhooks/useCounter'
-import { useInputArray } from '../customhooks/useInputArray'
-import { useBgColor } from '../customhooks/useBgColor'
 
-
-export default function About() {
-  const{bar, isShow, handleClick, handleDisplay} = useCounter();
-  const{text, array, handleChange, handleAdd} = useInputArray();
-  useBgColor();
+export default function About(props) {
+  const {
+    bar, 
+    isShow, 
+    handleClick, 
+    handleDisplay, text, array, handleChange, handleAdd} = props;
 
   return (
     <div className={styles.container}>
